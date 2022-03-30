@@ -9,7 +9,7 @@ namespace RestaurantAPI.Entities
     public class RestaurantDbContext : DbContext
     {
         private string _connectionString =
-            "Server=(localdb)//mssqllocaldb;Database=RestaurantDb;Trusted_Connection = True;";
+            "Server=WIN-5LP0NG2E4KA\\SQLEXPRESS;Database=RestaurantDb;Trusted_Connection = True;";
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Address> Adresses {get;set;}
         public DbSet<Dish> Dishes { get; set; }
@@ -29,6 +29,18 @@ namespace RestaurantAPI.Entities
             modelBuilder.Entity<Dish>()
                 .Property(d => d.Name)
                 .IsRequired();
+
+            //parametryzacja encji Adress
+            modelBuilder.Entity<Address>()
+                .Property(a => a.City)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Address>()
+                .Property(a => a.Street)
+                .IsRequired()
+                .HasMaxLength(50);
+
         }
 
 
